@@ -6,7 +6,6 @@ import Card from '@/components/Card.astro';
 import Heading from '@/components/Heading.astro';
 import { getCollection } from 'astro:content';
 
-const { title } = AppConfig;
 const { description } = AppConfig;
 
 const projects = await getCollection('projects');
