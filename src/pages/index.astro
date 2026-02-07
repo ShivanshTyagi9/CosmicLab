@@ -5,8 +5,6 @@ import Section from '@/components/Section.astro';
 import Hero from '@/components/Hero.astro';
 import Timeline from '@/components/Timeline.astro';
 import LatestPosts from '@/components/LatestPosts.astro';
-import { sortPostsByDate } from '@/utils/data.util';
-import { MarkdownInstance } from 'astro';
 import { getCollection } from 'astro:content';
 
 const { title } = AppConfig;
@@ -14,12 +12,6 @@ const { description } = AppConfig;
 
 const projects = await getCollection('projects');
 const blogs = await getCollection('blogs');
-
-const allPosts = Object.values(
-	import.meta.glob('./posts/*.md', { eager: true })
-) as MarkdownInstance<any>[];
-allPosts.sort(sortPostsByDate);
-const latestPosts = allPosts.slice(0, 3);
 
 const experienceTimeline = [
 	{
