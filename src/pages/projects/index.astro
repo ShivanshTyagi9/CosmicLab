@@ -1,0 +1,39 @@
+---
+import { AppConfig } from '@/utils/AppConfig';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Card from '@/components/Card.astro';
+import Heading from '@/components/Heading.astro';
+import { getCollection } from 'astro:content';
+
+const { title } = AppConfig;
+const { description } = AppConfig;
+
+const projects = await getCollection('projects');
+
+// Transform projects data to match Card component's expected format
+const transformedProjects = projects.map(project => ({
+	url: `/projects/${project.slug}`,
+	frontmatter: {
+		title: project.data.title,
+		pubDate: project.data.pubDate || new Date().toISOString(),
+		minutesRead: project.data.minutesRead || 'Project',
+		tags: project.data.tags || [],
+		excerpt: project.data.excerpt || 'View this project',
+		isPinned: project.data.isPinned || false
+	}
+}));
+---
+
+<Base head={{ title: 'Projects', description }}>
+	<Section><Heading title="Projects" /></Section>
+	<Section>
+		{
+			transformedProjects.map((project: any) => (
+				<div class="mb-4 basis-1 last:mb-0">
+					<Card post={project} />
+				</div>
+			))
+		}
+	</Section>
+</Base>

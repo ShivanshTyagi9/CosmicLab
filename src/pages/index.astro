@@ -1,0 +1,59 @@
+---
+import { AppConfig } from '@/utils/AppConfig';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Hero from '@/components/Hero.astro';
+import Timeline from '@/components/Timeline.astro';
+import LatestPosts from '@/components/LatestPosts.astro';
+import { sortPostsByDate } from '@/utils/data.util';
+import { MarkdownInstance } from 'astro';
+import { getCollection } from 'astro:content';
+
+const { title } = AppConfig;
+const { description } = AppConfig;
+
+const projects = await getCollection('projects');
+const blogs = await getCollection('blogs');
+
+const allPosts = Object.values(
+	import.meta.glob('./posts/*.md', { eager: true })
+) as MarkdownInstance<any>[];
+allPosts.sort(sortPostsByDate);
+const latestPosts = allPosts.slice(0, 3);
+
+const experienceTimeline = [
+	{
+		year: 'Jan 2026 - Present',
+		title: 'Machine Learning Research Intern',
+		organization: 'Government of India',
+		description: 'Building Real-time health monitoring system and Real-Time predictive system',
+		tags: ['Python', 'Data analysis']
+	},
+];
+
+// Merge collections
+const combined = [...blogs,...projects];
+
+// Sort by newest
+combined.sort((a, b) =>
+  new Date(b.data.pubDate).getTime() -
+  new Date(a.data.pubDate).getTime()
+);
+
+// Take latest 3
+const latest = combined.slice(0, 3);
+
+// Normalize for Card component
+const normalized = latest.map(entry => ({
+  url: `/${entry.collection}/${entry.slug}`,
+  frontmatter: entry.data
+}));
+---
+
+<Base head={{ title, description }}>
+	<Hero />
+	<Section>
+		<Timeline items={experienceTimeline} title="Experience" />
+	</Section>
+	<LatestPosts posts={normalized} />
+</Base>

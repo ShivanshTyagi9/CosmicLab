@@ -1,0 +1,65 @@
+---
+interface TimelineItem {
+	year: string;
+	title: string;
+    company?: string;
+	description: string;
+	tags?: string[];
+}
+
+interface Props {
+	items: TimelineItem[];
+	title?: string;
+}
+
+const { items, title = 'Experience' } = Astro.props;
+---
+
+<div class="py-8">
+	<h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12">{title}</h2>
+	
+	<div class="space-y-8">
+		{items.map((item, index) => (
+			<div class="flex gap-6 md:gap-8">
+				<!-- Timeline dot and line -->
+				<div class="flex flex-col items-center">
+					<div class="w-4 h-4 bg-blue-600 rounded-full ring-4 ring-blue-100 dark:ring-blue-900/30"></div>
+					{index < items.length - 1 && (
+						<div class="w-1 bg-gradient-to-b from-blue-200 to-slate-200 dark:from-blue-900/50 dark:to-slate-700/50" style="height: calc(100% + 2rem); margin-top: 1rem;"></div>
+					)}
+				</div>
+				
+				<!-- Content -->
+				<div class="flex-1 pt-1 pb-8 md:pb-0">
+					<div class="flex items-baseline gap-3 mb-2">
+						<span class="text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
+							{item.year}
+						</span>
+					</div>
+					<h3 class="text-xl font-semibold text-slate-900 dark:text-white">
+						{item.title}
+					</h3>
+
+                    {item.organization && (
+                        <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">
+                            {item.organization}
+                        </p>
+                    )}
+
+					<p class="text-slate-600 dark:text-slate-400 mb-3">
+						{item.description}
+					</p>
+					{item.tags && item.tags.length > 0 && (
+						<div class="flex flex-wrap gap-2">
+							{item.tags.map((tag) => (
+								<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded">
+									{tag}
+								</span>
+							))}
+						</div>
+					)}
+				</div>
+			</div>
+		))}
+	</div>
+</div>

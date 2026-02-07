@@ -1,0 +1,43 @@
+---
+import { AppConfig } from '@/utils/AppConfig';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Card from '@/components/Card.astro';
+import Heading from '@/components/Heading.astro';
+import { getCollection } from 'astro:content';
+
+const { title, description } = AppConfig;
+
+// Fetch both collections
+const blogs = await getCollection('blogs');
+const projects = await getCollection('projects');
+
+// Merge them
+const combined = [...blogs, ...projects];
+
+// Sort by pubDate (newest first)
+combined.sort((a, b) =>
+  new Date(b.data.pubDate ?? 0).getTime() -
+  new Date(a.data.pubDate ?? 0).getTime()
+);
+
+// Normalize for Card component
+const allPosts = combined.map(entry => ({
+  url: `/${entry.collection}/${entry.slug}`,
+  frontmatter: entry.data
+}));
+---
+
+
+<Base head={{ title, description }}>
+	<Section><Heading title="Posts" /></Section>
+	<Section>
+		{
+			allPosts.map((post: any) => (
+				<div class="mb-4 basis-1 last:mb-0">
+					<Card post={post} />
+				</div>
+			))
+		}
+	</Section>
+</Base>

@@ -1,0 +1,39 @@
+---
+import { AppConfig } from '@/utils/AppConfig';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import Card from '@/components/Card.astro';
+import Heading from '@/components/Heading.astro';
+import { getCollection } from 'astro:content';
+
+const { title } = AppConfig;
+const { description } = AppConfig;
+
+const blogs = await getCollection('blogs');
+
+// Transform blogs data to match Card component's expected format
+const transformedblogs = blogs.map(blog => ({
+	url: `/blogs/${blog.slug}`,
+	frontmatter: {
+		title: blog.data.title,
+		pubDate: blog.data.pubDate || new Date().toISOString(),
+		minutesRead: blog.data.minutesRead || 'Project',
+		tags: blog.data.tags || [],
+		excerpt: blog.data.excerpt || 'View this project',
+		isPinned: blog.data.isPinned || false
+	}
+}));
+---
+
+<Base head={{ title: 'blogs', description }}>
+	<Section><Heading title="blogs" /></Section>
+	<Section>
+		{
+			transformedblogs.map((blog: any) => (
+				<div class="mb-4 basis-1 last:mb-0">
+					<Card post={blog} />
+				</div>
+			))
+		}
+	</Section>
+</Base>

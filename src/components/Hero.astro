@@ -1,0 +1,114 @@
+---
+import Section from './Section.astro';
+import Social from './Social.astro';
+import { Github, Linkedin } from "lucide-astro";
+
+const site = Astro.site;
+---
+
+<Section>
+	<div class="flex flex-col md:flex-row items-center gap-12 py-12">
+
+		{/* LEFT SIDE */}
+		<div class="md:w-3/5">
+
+			<p class="pb-4 text-4xl font-bold">
+				Hi, I'm Shivansh — a machine learning engineer building what comes to mind.
+			</p>
+
+			<div class="text-base leading-relaxed text-black dark:text-white">
+				<p class="py-2">
+					It began with curiosity about how ChatGPT works, and evolved into building systems that genuinely interest me, from classical ML models to real-time reinforcement learning that interacts with the physical world.
+				</p>
+
+				<p class="py-2">
+					This space is where I share projects, experiments, and technical insights.
+				</p>
+			</div>
+
+			{/* SOCIAL ICONS */}
+			<div class="flex gap-4 mt-6">
+				<Social href="https://github.com/shivanshtyagi9" ariaLabel="GitHub">
+					<Github size={20} />
+				</Social>
+
+				<Social href="https://www.linkedin.com/in/shivansh-tyagi-4747a12ba/" ariaLabel="LinkedIn">
+					<Linkedin size={20} />
+				</Social>
+			</div>
+
+		</div>
+
+		{/* RIGHT SIDE RETRO NEURAL NETWORK */}
+<div class="md:w-1/2 flex justify-center items-center">
+
+	<div class="relative w-80 h-80">
+
+		<svg viewBox="0 0 400 400" class="w-full h-full">
+
+			{/* CONNECTIONS */}
+			<g stroke="currentColor"
+			   stroke-width="1"
+			   class="text-black dark:text-white opacity-40">
+
+				{/* Input (5) to Hidden (3) */}
+				{[60,130,200,270,340].map(y1 =>
+					[130,200,270].map(y2 =>
+						<line x1="80" y1={y1} x2="200" y2={y2} />
+					)
+				)}
+
+				{/* Hidden (3) to Output (2) */}
+				{[130,200,270].map(y1 =>
+					[160,240].map(y2 =>
+						<line x1="200" y1={y1} x2="320" y2={y2} />
+					)
+				)}
+
+			</g>
+
+			{/* NODES */}
+			<g fill="currentColor"
+			   class="text-black dark:text-white">
+
+				{/* INPUT LAYER (5) */}
+				{[60,130,200,270,340].map((y, i) => (
+					<circle cx="80" cy={y} r="6">
+						<animate attributeName="r"
+							values="6;9;6"
+							dur={`${2 + i * 0.3}s`}
+							repeatCount="indefinite" />
+					</circle>
+				))}
+
+				{/* HIDDEN LAYER (3) */}
+				{[130,200,270].map((y, i) => (
+					<circle cx="200" cy={y} r="6">
+						<animate attributeName="r"
+							values="6;10;6"
+							dur={`${2.2 + i * 0.4}s`}
+							repeatCount="indefinite" />
+					</circle>   
+				))}
+
+				{/* OUTPUT LAYER (2) */}
+				{[160,240].map((y, i) => (
+					<circle cx="320" cy={y} r="6">
+						<animate attributeName="r"
+							values="6;8;6"
+							dur={`${2.5 + i * 0.5}s`}
+							repeatCount="indefinite" />
+					</circle>
+				))}
+
+			</g>
+
+		</svg>
+
+	</div>
+
+</div>
+
+
+	</div>
+</Section>
