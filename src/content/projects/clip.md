@@ -13,10 +13,10 @@ tags: ["CLip", "Pytorch", "Python", "Optimization"]
 # CLIP Dream Engine  
 ### Semantic Image Optimization Without Diffusion
 
-![Example](public\images\projects\clouds_space_moon.png)
-![Example](public\images\projects\clouds_planet_comets_tech.png)
-![Example](public\images\projects\mountains_castle_flowers.png)
-![Example](public\images\projects\mountains_city_over_clouds.png)
+![Example](/images/projects/clouds_space_moon.png)
+![Example](/images/projects/clouds_planet_comets_tech.png)
+![Example](/images/projects/mountains_castle_flowers.png)
+![Example](/images/projects/mountains_city_over_clouds.png)
 
 ---
 
