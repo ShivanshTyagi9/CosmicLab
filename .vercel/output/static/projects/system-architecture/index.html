@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>System Workflow Architecture</title><meta name="description" content="Interactive visual overview of the end-to-end system architecture."><meta name="author" content="Cosmic"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" href="/rss.xml"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>"><script>
+	!(function (t, e) {
+		var o, n, p, r;
+		e.__SV ||
+			((window.posthog = e),
+			(e._i = []),
+			(e.init = function (i, s, a) {
+				function g(t, e) {
+					var o = e.split('.');
+					2 == o.length && ((t = t[o[0]]), (e = o[1])),
+						(t[e] = function () {
+							t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+						});
+				}
+				((p = t.createElement('script')).type = 'text/javascript'),
+					(p.crossOrigin = 'anonymous'),
+					(p.async = !0),
+					(p.src =
+						s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js'),
+					(r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r);
+				var u = e;
+				for (
+					void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+						u.people = u.people || [],
+						u.toString = function (t) {
+							var e = 'posthog';
+							return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e;
+						},
+						u.people.toString = function () {
+							return u.toString(1) + '.people (stub)';
+						},
+						o =
+							'init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric'.split(
+								' '
+							),
+						n = 0;
+					n < o.length;
+					n++
+				)
+					g(u, o[n]);
+				e._i.push([i, s, a]);
+			}),
+			(e.__SV = 1));
+	})(document, window.posthog || []);
+	posthog.init('phc_Hg5U4UUmxUkHFZOIxJekBqG6dAHSrEo9G521dpUcXv9', {
+		api_host: 'https://eu.i.posthog.com',
+		defaults: '2025-05-24',
+		person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users as well
+	});
+</script><link rel="stylesheet" href="/_astro/_slug_.DFSuD9lE.css"><script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+		var script = document.createElement('script');
+		script.defer = true;
+		script.src = '/_vercel/insights/script.js';
+		var head = document.querySelector('head');
+		head.appendChild(script);
+	</script><link rel="stylesheet" href="/_astro/SystemArchitecture_astro_astro_type_style_index_0_lang.Cq6ibyCo.css"></head> <body class="flex min-h-screen flex-col bg-stone-100 font-mono text-gray-950 dark:bg-stone-900 dark:text-white"> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="flex items-center justify-between"> <div class="text-3xl font-bold"> <a href="/">🔭 <span class="pr-2 text-2xl text-gray-500">&lt;</span>Cosmic<span class="text-orange-600"></span>Lab<span class="pl-2 text-2xl text-gray-500">/&gt;</span></a> </div> <div class="flex items-center"> <!-- Desktop Navigation --> <nav> <ul class="hidden flex-row sm:flex gap-6"> <li><a href="/tags" class="hover:text-orange-600">TAGS</a></li> <li><a href="/blogs" class="hover:text-orange-600">BLOG</a></li> <li><a href="/projects" class="hover:text-orange-600">PROJECTS</a></li> </ul> </nav> <!-- Desktop Theme Switcher --> <div class="ml-3 hidden flex-col justify-center sm:flex"> <input type="checkbox" id="light-switch-desktop" class="light-switch sr-only"> <label class="tada relative cursor-pointer p-2" for="light-switch-desktop"> <svg class="dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-stone-800" d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z"></path> <path class="fill-gray-900" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"></path> </svg> <svg class="hidden dark:block" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z"></path> <path class="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"></path> </svg> <span class="sr-only">Switch to light / dark version</span> </label> </div> <!-- Mobile Menu Button --> <button id="mobile-menu-button" class="p-2 sm:hidden" aria-label="Toggle mobile menu"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div>  <div id="mobile-menu" class="mt-4 hidden rounded-lg border border-gray-200 bg-white pb-2 shadow-md transition-all duration-300 sm:hidden dark:border-gray-200 dark:bg-stone-900"> <nav class="flex flex-col p-3"> <a href="/tags" class="border-b border-gray-200 py-2 hover:text-orange-600">TAGS</a> <a href="/" class="border-b border-gray-200 py-2 hover:text-orange-600">BLOG</a> <!-- Mobile Theme Switcher --> <div class="flex items-center py-2"> <input type="checkbox" id="light-switch-mobile" class="light-switch sr-only"> <label class="tada relative cursor-pointer p-2" for="light-switch-mobile"> <svg class="dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-stone-800" d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z"></path> <path class="fill-gray-900" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"></path> </svg> <svg class="hidden dark:block" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z"></path> <path class="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"></path> </svg> <span class="sr-only">Switch to light / dark version</span> </label> </div> </nav> </div>  </div> <script type="module">const o=document.querySelectorAll(".light-switch");function s(e){e?(document.documentElement.classList.add("dark"),localStorage.setItem("theme","dark")):(document.documentElement.classList.remove("dark"),localStorage.setItem("theme","light"))}if(o.length>0){const e=localStorage.getItem("theme")==="dark";s(e),o.forEach(n=>{n.checked=e}),o.forEach(n=>{n.addEventListener("click",()=>{const r=n.checked;s(r)})})}const t=document.getElementById("mobile-menu-button"),l=document.getElementById("mobile-menu");t&&l&&t.addEventListener("click",()=>{const e=t.getAttribute("aria-expanded")==="true"||!1;t.setAttribute("aria-expanded",(!e).toString()),l.classList.toggle("hidden"),e?t.innerHTML=`
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				`:t.innerHTML=`
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				`});</script> <div class="flex-1">  <div class="mx-auto w-full max-w-screen-md"> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="relative px-14 pt-6 pb-4 text-center"> <p class="text-4xl font-bold">System Workflow Architecture</p> </div>  </div> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="content prose dark:prose-invert prose-code:rounded-lg prose-code:bg-stone-800 prose-code:p-1 prose-code:text-orange-600 prose-img:rounded-lg prose-img:shadow-xl prose-img:dark:shadow-stone-800 mt-8 max-w-none text-base leading-8 text-black dark:text-white">  <h1 id="core-system-workflow">Core System Workflow</h1>
+<p>Here is the interactive architecture visualization constructed from the system blueprint. It maps out the flow from data sources to the final analytical layers powered by Qwen.</p>
+<div class="naval-container not-prose" data-astro-cid-cquvtzas> <div class="nv-grid" data-astro-cid-cquvtzas></div> <div class="radar-rings" data-astro-cid-cquvtzas></div> <div class="radar-sweep" data-astro-cid-cquvtzas></div> <svg class="nv-compass" viewBox="0 0 100 100" data-astro-cid-cquvtzas> <circle cx="50" cy="50" r="46" fill="none" stroke="#16384A" stroke-width="1" data-astro-cid-cquvtzas></circle> <circle cx="50" cy="50" r="38" fill="none" stroke="#16384A" stroke-width="0.5" data-astro-cid-cquvtzas></circle> <g stroke="#16384A" stroke-width="0.5" data-astro-cid-cquvtzas> <line x1="50" y1="4" x2="50" y2="96" data-astro-cid-cquvtzas></line><line x1="4" y1="50" x2="96" y2="50" data-astro-cid-cquvtzas></line> <line x1="17" y1="17" x2="83" y2="83" data-astro-cid-cquvtzas></line><line x1="83" y1="17" x2="17" y2="83" data-astro-cid-cquvtzas></line> </g> <polygon points="50,8 56,50 50,46 44,50" fill="#C84B31" data-astro-cid-cquvtzas></polygon> <polygon points="50,92 44,50 50,54 56,50" fill="#16384A" data-astro-cid-cquvtzas></polygon> <polygon points="92,50 50,44 54,50 50,56" fill="#16384A" data-astro-cid-cquvtzas></polygon> <polygon points="8,50 50,56 46,50 50,44" fill="#16384A" data-astro-cid-cquvtzas></polygon> <text x="50" y="20" font-size="8" text-anchor="middle" fill="#16384A" font-family="serif" data-astro-cid-cquvtzas>N</text> </svg> <div class="nv-header" data-astro-cid-cquvtzas> <div class="title-group" data-astro-cid-cquvtzas> <div class="title" data-astro-cid-cquvtzas> <svg class="crest" viewBox="0 0 32 32" fill="none" data-astro-cid-cquvtzas> <path d="M16 2l3 5 5.5 1-4 4 1 5.5L16 20l-5.5 2.5 1-5.5-4-4L13 12z" fill="#D69A2D" data-astro-cid-cquvtzas></path> <path d="M16 21c-4 3-9 3-12 1 2 4 7 7 12 7s10-3 12-7c-3 2-8 2-12-1z" fill="#16384A" data-astro-cid-cquvtzas></path> </svg>
+Naval Intelligence System
+</div> <div class="subtitle" data-astro-cid-cquvtzas>Vessel tracking · Imagery fusion · Agentic analysis</div> </div> <div class="legend" data-astro-cid-cquvtzas> <span class="legend-item" data-astro-cid-cquvtzas><span class="legend-pin" style="background:#2A9D8F" data-astro-cid-cquvtzas></span>AIS</span> <span class="legend-item" data-astro-cid-cquvtzas><span class="legend-pin" style="background:#D69A2D" data-astro-cid-cquvtzas></span>Satellite</span> <span class="legend-item" data-astro-cid-cquvtzas><span class="legend-pin" style="background:#4A6FA5" data-astro-cid-cquvtzas></span>Storage</span> <span class="legend-item" data-astro-cid-cquvtzas><span class="legend-pin" style="background:#C84B31" data-astro-cid-cquvtzas></span>Command</span> <span class="legend-item" data-astro-cid-cquvtzas><span class="legend-pin" style="background:#7A9E5E" data-astro-cid-cquvtzas></span>Modules</span> </div> </div> <div id="sys-canvas-container" data-astro-cid-cquvtzas> <div id="sys-workspace" data-astro-cid-cquvtzas> <svg class="wires" id="sys-svg-layer" data-astro-cid-cquvtzas></svg> <div id="sys-zones-layer" data-astro-cid-cquvtzas></div> <div id="sys-nodes-layer" data-astro-cid-cquvtzas></div> </div> </div> </div>  <script type="module" src="/_astro/SystemArchitecture.astro_astro_type_script_index_0_lang.Bkw-FIvT.js"></script>
+<h2 id="pipeline-highlights">Pipeline Highlights</h2>
+<p>The system operates across three distinct processing stages:</p>
+<ol>
+<li><strong>Telemetry &amp; Imagery Pipelines:</strong>
+<ul>
+<li>AIS data is ingested, decoded, and correlated before resting in PostgreSQL.</li>
+<li>Satellite Imagery is preprocessed into different formats (<code>Mbtiles</code>, <code>Jpg Clips</code>, and a metadata <code>Master CSV</code>) and stored in MinIO.</li>
+</ul>
+</li>
+<li><strong>Correlation Layer:</strong>
+<ul>
+<li>The processed insights from the satellite data (<code>Master CSV</code>) are fed into the correlation engine for cross-referencing with decoded AIS telemetry.</li>
+</ul>
+</li>
+<li><strong>Agentic Layer:</strong>
+<ul>
+<li>The central <strong>ReAcT Loop</strong> pulls insights from both PostgreSQL and MinIO.</li>
+<li>It utilizes sophisticated tools, memory layers, and an Embedding Model to feed the Qwen 2.5 35B LLM.</li>
+</ul>
+</li>
+</ol>  </div>  </div> </div>  </div> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <footer class="text-center">
+© 2026 - <a class="underline hover:text-orange-600" href="https://github.com/ShivanshTyagi9/CosmicLab/#" target="_blank">CosmicLab</a> by <a class="underline hover:text-orange-600" href="https://www.linkedin.com/in/shivansh-tyagi-4747a12ba/" target="_blank">Cosmic</a> </footer>  </div> </body></html>
