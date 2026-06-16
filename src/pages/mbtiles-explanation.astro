@@ -1,0 +1,38 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import MBTilesArchitecture from '@/components/MBTilesArchitecture.astro';
+---
+
+<Base head={{ title: 'MBTiles Conversion Pipeline', description: 'Architectural explanation of the high-throughput MBTiles conversion pipeline.' }}>
+  <Section>
+    <div class="prose dark:prose-invert mt-8 max-w-none">
+      <h1>High-Throughput MBTiles Conversion Pipeline</h1>
+      <p>The MBTiles Converter is a custom-engineered pipeline designed to rapidly transcode massive GeoTIFFs into SQLite-backed MBTiles maps. By leveraging multi-level concurrency and RAM-disk execution, it achieves 100% CPU saturation and completely eliminates the random I/O bottlenecks that paralyze standard mapping libraries.</p>
+      
+      <h2>Architectural Workflow</h2>
+    </div>
+    
+    <div class="my-10 w-full">
+      <MBTilesArchitecture />
+    </div>
+    
+    <div class="prose dark:prose-invert max-w-none mb-12">
+      <h2>Pipeline Components & Optimizations</h2>
+      <ul>
+        <li><strong>Outer Process Pool:</strong> Orchestrates the conversion of multiple massive <code>.tif</code> files in parallel. Each conversion runs in a spawned, isolated process, keeping the GDAL state perfectly clean.</li>
+        <li><strong>Inner Tile Fork-Pool:</strong> Inside each outer process, a highly optimized fork-pool is initialized. It distributes small "tile generation chunks" across all available CPU cores, calculating Web Mercator math and rendering raw pixels to <code>256x256 PNGs</code> simultaneously.</li>
+        <li><strong>In-Memory SQLite Database:</strong> The actual <code>.mbtiles</code> SQLite database is created on the <code>tmpfs</code> RAM Disk. Once all tiles are inserted, the system performs a single, highly efficient <code>shutil.copy2</code> sequential copy to final NVMe storage.</li>
+      </ul>
+
+      <h2>How This Defeats Traditional GDAL Bottlenecks</h2>
+      <p>Traditional map tiling (using tools like <code>gdal_translate</code> or <code>gdal2tiles.py</code>) suffers from severe architectural limits when processing gigapixel images. This custom pipeline defeats them through three critical innovations:</p>
+      
+      <ol>
+        <li><strong>Double-Layer Concurrency:</strong> Standard GDAL scripts are often single-threaded or hit internal locks. This pipeline spawns <em>outer workers</em> for file-level parallelization, and <em>inner fork-pools</em> for pixel-level parallelization, achieving true 100% core saturation on 64+ core machines.</li>
+        <li><strong>Aggressive SQLite Pragmas:</strong> GDAL's default SQLite driver respects ACID compliance, writing journals for every transaction. This pipeline disables all of that: <code>journal_mode=OFF</code>, <code>synchronous=OFF</code>, and <code>temp_store=MEMORY</code>. Since the database is built on volatile RAM, durability during generation doesn't matter. This allows the IPC batches to insert data virtually instantaneously.</li>
+        <li><strong>Eradicating Random I/O:</strong> MBTiles are SQLite databases. Writing thousands of individual PNGs into a database on an NVMe drive generates chaotic, random I/O traffic that slows modern SSDs to a crawl. By building the entire SQLite database in memory first, the pipeline transforms millions of tiny random writes into <strong>one massive linear copy</strong> at the very end.</li>
+      </ol>
+    </div>
+  </Section>
+</Base>

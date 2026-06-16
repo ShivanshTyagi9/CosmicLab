@@ -1,0 +1,369 @@
+---
+---
+
+<div class="naval-container not-prose">
+  <div class="nv-grid"></div>
+  <div class="radar-rings"></div>
+  <div class="radar-sweep"></div>
+
+  <svg class="nv-compass" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#16384A" stroke-width="1"/>
+    <circle cx="50" cy="50" r="38" fill="none" stroke="#16384A" stroke-width="0.5"/>
+    <g stroke="#16384A" stroke-width="0.5">
+      <line x1="50" y1="4" x2="50" y2="96"/><line x1="4" y1="50" x2="96" y2="50"/>
+      <line x1="17" y1="17" x2="83" y2="83"/><line x1="83" y1="17" x2="17" y2="83"/>
+    </g>
+    <polygon points="50,8 56,50 50,46 44,50" fill="#C84B31"/>
+    <polygon points="50,92 44,50 50,54 56,50" fill="#16384A"/>
+    <polygon points="92,50 50,44 54,50 50,56" fill="#16384A"/>
+    <polygon points="8,50 50,56 46,50 50,44" fill="#16384A"/>
+    <text x="50" y="20" font-size="8" text-anchor="middle" fill="#16384A" font-family="serif">N</text>
+  </svg>
+
+  <div class="nv-header">
+    <div class="title-group">
+      <div class="title">
+        <svg class="crest" viewBox="0 0 32 32" fill="none">
+          <path d="M16 2l3 5 5.5 1-4 4 1 5.5L16 20l-5.5 2.5 1-5.5-4-4L13 12z" fill="#D69A2D"/>
+          <path d="M16 21c-4 3-9 3-12 1 2 4 7 7 12 7s10-3 12-7c-3 2-8 2-12-1z" fill="#16384A"/>
+        </svg>
+        MBTiles Conversion Pipeline
+      </div>
+      <div class="subtitle">High-Throughput Concurrent Generation · In-Memory SQLite</div>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-pin" style="background:#4A6FA5"></span>Storage</span>
+      <span class="legend-item"><span class="legend-pin" style="background:#D69A2D"></span>GDAL</span>
+      <span class="legend-item"><span class="legend-pin" style="background:#2A9D8F"></span>RAM Disk</span>
+      <span class="legend-item"><span class="legend-pin" style="background:#C84B31"></span>Concurrency</span>
+      <span class="legend-item"><span class="legend-pin" style="background:#7A9E5E"></span>SQLite</span>
+    </div>
+  </div>
+
+  <div id="mbt-canvas-container">
+    <div id="mbt-workspace">
+      <svg class="wires" id="mbt-svg-layer"></svg>
+      <div id="mbt-zones-layer"></div>
+      <div id="mbt-nodes-layer"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@500;600;700&display=swap');
+
+  .naval-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 16px;
+    margin: 2rem 0;
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: #1B3A4B;
+    background: radial-gradient(ellipse 70% 60% at 50% 45%, #FBF1D9 0%, #F4E6C7 55%, #E9D5AE 100%);
+    border: 1px solid #C9AF82;
+    box-shadow: inset 0 0 60px rgba(120,80,30,0.18), inset 0 1px 0 rgba(255,255,255,0.5), 0 18px 50px -16px rgba(80,55,25,0.4);
+  }
+
+  .nv-grid {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 79px, rgba(70,90,90,0.10) 79px 80px),
+      repeating-linear-gradient(90deg, transparent 0 79px, rgba(70,90,90,0.10) 79px 80px);
+    -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 35%, transparent 88%);
+    mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 35%, transparent 88%);
+  }
+  .nv-compass { position: absolute; bottom: 24px; right: 22px; width: 130px; height: 130px; z-index: 2; opacity: 0.14; pointer-events: none; }
+
+  .radar-sweep {
+    position: absolute; width: 560px; height: 560px; left: 34%; bottom: -200px; z-index: 2; pointer-events: none;
+    border-radius: 50%; opacity: 0.4;
+    background: conic-gradient(from 0deg, rgba(42,157,143,0) 0deg, rgba(42,157,143,0) 300deg, rgba(42,157,143,0.26) 350deg, rgba(42,157,143,0.42) 360deg);
+    animation: sweep 8s linear infinite;
+  }
+  @keyframes sweep { to { transform: rotate(360deg); } }
+  .radar-rings {
+    position: absolute; width: 560px; height: 560px; left: 34%; bottom: -200px; z-index: 1; pointer-events: none; opacity: 0.26;
+    background: radial-gradient(circle, transparent 0 24%, rgba(42,157,143,0.4) 24.5% 25%, transparent 25.5% 49%, rgba(42,157,143,0.4) 49.5% 50%, transparent 50.5% 74%, rgba(42,157,143,0.4) 74.5% 75%, transparent 75.5%);
+  }
+
+  .nv-header {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 60;
+    padding: 18px 22px 14px; display: flex; justify-content: space-between; align-items: flex-start;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(247,236,210,0.96) 0%, rgba(247,236,210,0.7) 55%, transparent 100%);
+  }
+  .title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: #16384A; letter-spacing: 0.3px; display: flex; align-items: center; gap: 10px; }
+  .crest { width: 30px; height: 30px; }
+  .subtitle { font-size: 11.5px; color: #5E7A6B; margin-top: 3px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; }
+  .legend { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 300px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 700; color: #234;
+    background: rgba(255,253,245,0.75); padding: 4px 9px; border-radius: 4px; border: 1px solid rgba(27,58,75,0.18); }
+  .legend-pin { width: 8px; height: 8px; border-radius: 2px; transform: rotate(45deg); }
+
+  #mbt-canvas-container { position: absolute; inset: 0; z-index: 5; }
+  #mbt-workspace { position: absolute; transform-origin: 0 0; will-change: transform; }
+  svg.wires { position: absolute; top: 0; left: 0; width: 3200px; height: 3200px; pointer-events: none; z-index: 6; overflow: visible; }
+
+  :global(.zone-group) { position: absolute; border-radius: 12px; z-index: 4; background: rgba(255,253,245,0.28); }
+  :global(.zone-label) {
+    position: absolute; top: -15px; left: 20px; font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600;
+    padding: 4px 16px; border-radius: 3px; color: #FBF1D9; letter-spacing: 1px; box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%, 8px 50%);
+  }
+
+  :global(.vessel) { stroke: #FBF1D9; stroke-width: 1; }
+
+  :global(.workflow-node) {
+    position: absolute; width: 248px; display: flex; align-items: center; gap: 14px; padding: 17px 19px;
+    background: linear-gradient(180deg, #FFFDF6, #FBF3DF); border-radius: 15px; transform: translate(-50%, -50%);
+    border: 2px solid #E4D2A8; box-shadow: 0 9px 22px -8px rgba(70,45,15,0.42), inset 0 1px 0 rgba(255,255,255,0.8);
+    cursor: default; z-index: 10; opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s, border-color 0.3s;
+  }
+  :global(.workflow-node.wide) { width: 320px; }
+  :global(.workflow-node:hover) {
+    transform: translate(-50%, -50%) translateY(-4px) scale(1.035); z-index: 50;
+    box-shadow: 0 16px 34px -10px rgba(70,45,15,0.5); border-color: #D6BE8A;
+  }
+
+  :global(.node-bob) { animation: bob 6s ease-in-out infinite; display: flex; align-items: center; gap: 14px; width: 100%; }
+  @keyframes bob { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3px) rotate(-0.4deg); } }
+
+  :global(.icon-ring) {
+    width: 56px; height: 56px; min-width: 56px; border-radius: 15px; display: flex; align-items: center; justify-content: center;
+    color: #fff; box-shadow: 0 5px 12px -2px rgba(0,0,0,0.32); position: relative;
+  }
+  :global(.icon-ring svg) { width: 28px; height: 28px; fill: #fff; }
+  :global(.icon-ring::after) { content: ''; position: absolute; top: 5px; left: 6px; right: 6px; height: 40%; border-radius: 11px 11px 50% 50%; background: linear-gradient(rgba(255,255,255,0.42), transparent); }
+
+  :global(.node-text) { display: flex; flex-direction: column; min-width: 0; }
+  :global(.node-label) { font-weight: 700; font-size: 16.5px; color: #173544; line-height: 1.2; white-space: nowrap; }
+  :global(.node-desc) { font-size: 13px; color: #8A7A55; margin-top: 3px; font-weight: 700; white-space: nowrap; letter-spacing: 0.2px; }
+
+  :global(.node-tooltip) {
+    position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(4px);
+    background: #16384A; color: #EAF6E9; font-size: 13px; font-weight: 700; padding: 9px 13px; border-radius: 8px;
+    white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; z-index: 200;
+    box-shadow: 0 8px 18px rgba(20,50,40,0.45);
+  }
+  :global(.node-tooltip::after) { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #16384A; }
+  :global(.workflow-node:hover .node-tooltip) { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  :global(.route-flow) { animation: route 1.8s linear infinite; }
+  @keyframes route { to { stroke-dashoffset: -40; } }
+
+  @media (max-width: 640px) {
+    .naval-container { height: 620px; }
+    .nv-header { flex-direction: column; gap: 8px; }
+    .legend { justify-content: flex-start; }
+    .nv-compass { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .node-bob, .radar-sweep, .vessel, .route-flow { animation: none !important; }
+  }
+</style>
+
+<script>
+const C = {
+  cyan:   { c: '#2A9D8F', s: '#6FC4B8' },
+  orange: { c: '#D69A2D', s: '#EBC274' },
+  purple: { c: '#4A6FA5', s: '#8AA7CE' },
+  pink:   { c: '#C84B31', s: '#E0856F' },
+  green:  { c: '#7A9E5E', s: '#A9C68C' }
+};
+
+const icons = {
+  radio: `<svg viewBox="0 0 24 24"><path d="M12 8a2 2 0 00-1 3.7V21h2v-9.3A2 2 0 0012 8zm-4.2-.2L6.4 6.4a8 8 0 000 11.3l1.4-1.4a6 6 0 010-8.5zm8.4 0a6 6 0 010 8.5l1.4 1.4a8 8 0 000-11.3l-1.4 1.4zM5 5L3.6 3.6a12 12 0 000 17l1.4-1.4a10 10 0 010-14.2zM19 5l-1.4 1.4a10 10 0 010 14.2L19 22a12 12 0 000-17z"/></svg>`,
+  gear: `<svg viewBox="0 0 24 24"><path d="M19.4 13c.04-.3.06-.66.06-1s-.02-.7-.06-1l2.1-1.6a.5.5 0 00.12-.64l-2-3.46a.5.5 0 00-.6-.22l-2.5 1a7.3 7.3 0 00-1.7-1l-.38-2.65A.5.5 0 0014 2h-4a.5.5 0 00-.5.42L9.1 5.07c-.6.25-1.2.6-1.7 1l-2.5-1a.5.5 0 00-.6.22l-2 3.46a.5.5 0 00.12.64L4.5 11c-.04.3-.06.66-.06 1s.02.7.06 1l-2.1 1.6a.5.5 0 00-.12.64l2 3.46c.14.22.4.3.6.22l2.5-1c.5.4 1.1.75 1.7 1l.38 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.38-2.65c.6-.25 1.2-.6 1.7-1l2.5 1c.22.08.46 0 .6-.22l2-3.46a.5.5 0 00-.12-.64L19.4 13zM12 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/></svg>`,
+  db: `<svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 3.8 5 6v12c0 2.2 3.1 4 7 4s7-1.8 7-4V6c0-2.2-3.1-4-7-4zm0 2.6c3.1 0 5.5 1 5.5 1.4S15.1 7.4 12 7.4 6.5 6.4 6.5 6 8.9 4.6 12 4.6z"/></svg>`,
+  lens: `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 3a7 7 0 016.7 5h-5.2L12 7.3 10.5 10H5.3A7 7 0 0112 5zm0 14a7 7 0 01-6.7-5h5.2L12 16.7 13.5 14h5.2a7 7 0 01-6.7 5z"/></svg>`,
+  logbook: `<svg viewBox="0 0 24 24"><path d="M19 3H7a2 2 0 00-2 2v14a2 2 0 002 2h12a1 1 0 001-1V4a1 1 0 00-1-1zM9 7h8v2H9V7zm0 4h8v2H9v-2zm0 4h5v2H9v-2zM5 5v14a2 2 0 002 2H5a2 2 0 01-2-2V5a2 2 0 012-2 2 2 0 00-2 2z"/></svg>`,
+  cargo: `<svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7zm9-1.8L6.2 7.7 12 10.3l5.8-2.6L12 5.2zM5 9.3v6.4l6 2.7v-6.5L5 9.3zm14 0l-6 2.6v6.5l6-2.7V9.3z"/></svg>`,
+  radar: `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 109.5 13H19a8 8 0 11-1-9.6L12 12l8-6.5A9.97 9.97 0 0012 2zm0 6a4 4 0 104 4h-2a2 2 0 11-2-2V8z"/></svg>`,
+  chart: `<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v4h4V5H5zm6 0v4h4V5h-4zm6 0v4h-2V5h2zM5 11v4h4v-4H5zm6 0v4h4v-4h-4zm6 0v4h-2v-4h2zM5 17v2h4v-2H5zm6 0v2h4v-2h-4z"/></svg>`,
+  image: `<svg viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5l3.5-4.5z"/></svg>`,
+  compass: `<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16zm4.2-12.2l-6 2.4-2.4 6 6-2.4 2.4-6zM12 13.2a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4z"/></svg>`,
+  chip: `<svg viewBox="0 0 24 24"><path d="M9 3v2H7a2 2 0 00-2 2v2H3v2h2v2H3v2h2v2a2 2 0 002 2h2v2h2v-2h2v2h2v-2h2a2 2 0 002-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 00-2-2h-2V3h-2v2h-2V3H9zm0 6h6v6H9V9z"/></svg>`
+};
+
+const nodes = [
+  { id: 'tif', label: 'Source GeoTIFF', desc: 'NVMe Storage', icon: 'cargo', x: 180, y: 250, type: 'purple', tip: 'Input from Preprocessing Pipeline' },
+  { id: 'warp', label: 'gdalwarp', desc: 'ALL_CPUS Reproject', icon: 'lens', x: 480, y: 250, type: 'orange', tip: 'Multi-thread Web Mercator warp' },
+  
+  { id: 'ram', label: 'Mounted RAM Disk', desc: 'tmpfs cache', icon: 'db', x: 1100, y: 100, type: 'cyan', tip: 'Zero-latency SQLite building' },
+  
+  { id: 'pool', label: 'Outer Process Pool', desc: 'Concurrent TIFs', icon: 'gear', x: 780, y: 250, type: 'pink', tip: 'Spawn context, parallel files' },
+  { id: 'fork', label: 'Inner Tile Workers', desc: 'Chunked Generation', icon: 'chip', x: 1080, y: 250, type: 'pink', tip: 'Fork context, parallel pixels' },
+  
+  { id: 'sqlite', label: 'SQLite Engine', desc: 'Aggressive Pragmas', icon: 'logbook', x: 1380, y: 250, type: 'green', tip: 'journal=OFF, sync=OFF, temp=MEMORY' },
+  { id: 'mbtiles', label: 'In-Memory MBTiles', desc: 'Batched IPC Inserts', icon: 'image', x: 1680, y: 250, type: 'green', tip: 'High-speed tile transactions' },
+  
+  { id: 'nvme', label: 'NVMe Storage', desc: 'Sequential Copy', icon: 'db', x: 2020, y: 250, type: 'purple', tip: 'Single continuous write operation' }
+];
+
+const links = [
+  { from: 'tif', to: 'warp' },
+  { from: 'warp', to: 'pool' },
+  { from: 'pool', to: 'fork' },
+  { from: 'fork', to: 'sqlite' },
+  { from: 'sqlite', to: 'mbtiles' },
+  { from: 'mbtiles', to: 'nvme' },
+  { from: 'ram', to: 'pool' },
+  { from: 'ram', to: 'sqlite' },
+  { from: 'ram', to: 'mbtiles' }
+];
+
+const zones = [
+  { label: 'INGESTION', color: '#4A6FA5', x: 50, y: 80, w: 550, h: 300 },
+  { label: 'PARALLEL TILING (tmpfs)', color: '#C84B31', x: 620, y: 30, w: 1220, h: 360 },
+  { label: 'PERSISTENCE', color: '#7A9E5E', x: 1880, y: 80, w: 260, h: 300 }
+];
+
+function hexA(h, a) {
+  const n = parseInt(h.slice(1), 16);
+  return `rgba(${n >> 16 & 255}, ${n >> 8 & 255}, ${n & 255}, ${a})`;
+}
+
+const nodesLayer = document.getElementById('mbt-nodes-layer');
+const svgLayer = document.getElementById('mbt-svg-layer');
+const zonesLayer = document.getElementById('mbt-zones-layer');
+const NS = 'http://www.w3.org/2000/svg';
+
+if (nodesLayer && svgLayer && zonesLayer) {
+
+  // Zones
+  zones.forEach(z => {
+    const el = document.createElement('div');
+    el.className = 'zone-group';
+    el.style.cssText = `left:${z.x}px;top:${z.y}px;width:${z.w}px;height:${z.h}px;border:2px dashed ${hexA(z.color, 0.4)};`;
+    el.innerHTML = `<span class="zone-label" style="background:${z.color}">${z.label}</span>`;
+    zonesLayer.appendChild(el);
+  });
+
+  function drawPath(fromNode, toNode) {
+    const x1 = fromNode.x, y1 = fromNode.y, x2 = toNode.x, y2 = toNode.y;
+    // Straight line if Y is same
+    if (Math.abs(y1 - y2) < 5) {
+        return `M ${x1} ${y1} L ${x2} ${y2}`;
+    }
+    const ctrlY = y1 + (y2 - y1) / 2;
+    return `M ${x1} ${y1} C ${x1} ${ctrlY}, ${x2} ${ctrlY}, ${x2} ${y2}`;
+  }
+
+  links.forEach((l, i) => {
+    const fromNode = nodes.find(n => n.id === l.from);
+    const toNode = nodes.find(n => n.id === l.to);
+    if (!fromNode || !toNode) return;
+
+    const d = drawPath(fromNode, toNode);
+    const col = C[fromNode.type].c;
+    const g = document.createElementNS(NS, 'g');
+    const id = 'mbt-route-' + i;
+
+    const mk = (w, stroke, opacity, attrs) => {
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', d);
+      p.setAttribute('fill', 'none');
+      p.setAttribute('stroke', stroke);
+      p.setAttribute('stroke-width', w);
+      p.setAttribute('stroke-linecap', 'round');
+      if (opacity) p.setAttribute('opacity', opacity);
+      if (attrs) Object.entries(attrs).forEach(([k, v]) => p.setAttribute(k, v));
+      return p;
+    };
+
+    g.appendChild(mk(10, hexA(col, 0.16)));
+    g.appendChild(mk(3.5, col, '0.85', { id }));
+
+    const flow = mk(2.2, '#FBF1D9', '0.9', { 'stroke-dasharray': '3 18', class: 'route-flow' });
+    flow.style.animationDelay = `${i * -0.2}s`;
+    g.appendChild(flow);
+
+    const v = document.createElementNS(NS, 'polygon');
+    v.setAttribute('points', '-6,-4.5 9,0 -6,4.5 -1.5,0');
+    v.setAttribute('fill', col);
+    v.setAttribute('class', 'vessel');
+    const am = document.createElementNS(NS, 'animateMotion');
+    am.setAttribute('dur', `${5 + (i % 3) * 1.5}s`);
+    am.setAttribute('repeatCount', 'indefinite');
+    am.setAttribute('rotate', 'auto');
+    am.setAttribute('begin', `${i * -0.4}s`);
+    const mp = document.createElementNS(NS, 'mpath');
+    mp.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#' + id);
+    am.appendChild(mp);
+    v.appendChild(am);
+    g.appendChild(v);
+
+    svgLayer.appendChild(g);
+  });
+
+  nodes.forEach((n, i) => {
+    const el = document.createElement(n.link ? 'a' : 'div');
+    if (n.link) {
+      el.href = n.link;
+      el.style.textDecoration = 'none';
+      el.style.color = 'inherit';
+      el.style.cursor = 'pointer';
+    }
+    el.className = `workflow-node ${n.type} ${n.wide ? 'wide' : ''}`;
+    el.style.left = `${n.x}px`;
+    el.style.top = `${n.y}px`;
+
+    const col = C[n.type].c, soft = C[n.type].s;
+    el.innerHTML = `
+      <div class="node-bob" style="animation-delay:${i * 0.4}s">
+        <div class="icon-ring" style="background:linear-gradient(140deg, ${soft}, ${col})">${icons[n.icon] || ''}</div>
+        <div class="node-text">
+          <div class="node-label">${n.label}</div>
+          <div class="node-desc">${n.desc}</div>
+        </div>
+        ${n.tip ? `<div class="node-tooltip">${n.tip}</div>` : ''}
+      </div>
+    `;
+    nodesLayer.appendChild(el);
+
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.55s ease, transform 0.55s cubic-bezier(0.34,1.56,0.64,1)';
+        el.style.opacity = '1';
+        el.style.transform = 'translate(-50%, -50%)';
+      }, 100 + i * 55);
+    });
+    el.style.transform = 'translate(-50%, -50%) scale(0.82) translateY(12px)';
+  });
+
+  const workspace = document.getElementById('mbt-workspace');
+  const canvas = document.getElementById('mbt-canvas-container');
+
+  function fitToContainer() {
+    if (!workspace || !canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const headerH = 104;
+    const padX = 40, padBot = 20;
+    
+    const minX = 0, maxX = 2200, minY = 20, maxY = 450;
+    
+    const graphW = (maxX - minX) + padX * 2;
+    const graphH = (maxY - minY);
+
+    const availW = rect.width;
+    const availH = rect.height - headerH - padBot;
+    const scale = Math.min(availW / graphW, availH / graphH);
+
+    const drawW = graphW * scale, drawH = graphH * scale;
+    const panX = (availW - drawW) / 2 - (minX - padX) * scale;
+    const panY = headerH + (availH - drawH) / 2 - minY * scale;
+
+    workspace.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+  }
+
+  if (canvas) {
+    const observer = new ResizeObserver(() => fitToContainer());
+    observer.observe(canvas);
+  }
+}
+</script>

@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CLIP guided pixel optimizations (Dreams)</title><meta name="description" content="This is the first post of my new Astro blog."><meta name="author" content="Cosmic"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" href="/rss.xml"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>"><script>
+	!(function (t, e) {
+		var o, n, p, r;
+		e.__SV ||
+			((window.posthog = e),
+			(e._i = []),
+			(e.init = function (i, s, a) {
+				function g(t, e) {
+					var o = e.split('.');
+					2 == o.length && ((t = t[o[0]]), (e = o[1])),
+						(t[e] = function () {
+							t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+						});
+				}
+				((p = t.createElement('script')).type = 'text/javascript'),
+					(p.crossOrigin = 'anonymous'),
+					(p.async = !0),
+					(p.src =
+						s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js'),
+					(r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r);
+				var u = e;
+				for (
+					void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+						u.people = u.people || [],
+						u.toString = function (t) {
+							var e = 'posthog';
+							return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e;
+						},
+						u.people.toString = function () {
+							return u.toString(1) + '.people (stub)';
+						},
+						o =
+							'init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric'.split(
+								' '
+							),
+						n = 0;
+					n < o.length;
+					n++
+				)
+					g(u, o[n]);
+				e._i.push([i, s, a]);
+			}),
+			(e.__SV = 1));
+	})(document, window.posthog || []);
+	posthog.init('phc_Hg5U4UUmxUkHFZOIxJekBqG6dAHSrEo9G521dpUcXv9', {
+		api_host: 'https://eu.i.posthog.com',
+		defaults: '2025-05-24',
+		person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users as well
+	});
+</script><link rel="stylesheet" href="/_astro/_slug_.x64rEJUl.css"><script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+		var script = document.createElement('script');
+		script.defer = true;
+		script.src = '/_vercel/insights/script.js';
+		var head = document.querySelector('head');
+		head.appendChild(script);
+	</script></head> <body class="flex min-h-screen flex-col bg-stone-100 font-mono text-gray-950 dark:bg-stone-900 dark:text-white"> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="flex items-center justify-between"> <div class="text-3xl font-bold"> <a href="/">🔭 <span class="pr-2 text-2xl text-gray-500">&lt;</span>Cosmic<span class="text-orange-600"></span>Lab<span class="pl-2 text-2xl text-gray-500">/&gt;</span></a> </div> <div class="flex items-center"> <!-- Desktop Navigation --> <nav> <ul class="hidden flex-row sm:flex gap-6"> <li><a href="/tags" class="hover:text-orange-600">TAGS</a></li> <li><a href="/blogs" class="hover:text-orange-600">BLOG</a></li> <li><a href="/projects" class="hover:text-orange-600">PROJECTS</a></li> </ul> </nav> <!-- Desktop Theme Switcher --> <div class="ml-3 hidden flex-col justify-center sm:flex"> <input type="checkbox" id="light-switch-desktop" class="light-switch sr-only"> <label class="tada relative cursor-pointer p-2" for="light-switch-desktop"> <svg class="dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-stone-800" d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z"></path> <path class="fill-gray-900" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"></path> </svg> <svg class="hidden dark:block" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z"></path> <path class="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"></path> </svg> <span class="sr-only">Switch to light / dark version</span> </label> </div> <!-- Mobile Menu Button --> <button id="mobile-menu-button" class="p-2 sm:hidden" aria-label="Toggle mobile menu"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div>  <div id="mobile-menu" class="mt-4 hidden rounded-lg border border-gray-200 bg-white pb-2 shadow-md transition-all duration-300 sm:hidden dark:border-gray-200 dark:bg-stone-900"> <nav class="flex flex-col p-3"> <a href="/tags" class="border-b border-gray-200 py-2 hover:text-orange-600">TAGS</a> <a href="/" class="border-b border-gray-200 py-2 hover:text-orange-600">BLOG</a> <!-- Mobile Theme Switcher --> <div class="flex items-center py-2"> <input type="checkbox" id="light-switch-mobile" class="light-switch sr-only"> <label class="tada relative cursor-pointer p-2" for="light-switch-mobile"> <svg class="dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-stone-800" d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z"></path> <path class="fill-gray-900" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"></path> </svg> <svg class="hidden dark:block" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z"></path> <path class="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"></path> </svg> <span class="sr-only">Switch to light / dark version</span> </label> </div> </nav> </div>  </div> <script type="module">const o=document.querySelectorAll(".light-switch");function s(e){e?(document.documentElement.classList.add("dark"),localStorage.setItem("theme","dark")):(document.documentElement.classList.remove("dark"),localStorage.setItem("theme","light"))}if(o.length>0){const e=localStorage.getItem("theme")==="dark";s(e),o.forEach(n=>{n.checked=e}),o.forEach(n=>{n.addEventListener("click",()=>{const r=n.checked;s(r)})})}const t=document.getElementById("mobile-menu-button"),l=document.getElementById("mobile-menu");t&&l&&t.addEventListener("click",()=>{const e=t.getAttribute("aria-expanded")==="true"||!1;t.setAttribute("aria-expanded",(!e).toString()),l.classList.toggle("hidden"),e?t.innerHTML=`
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				`:t.innerHTML=`
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				`});</script> <div class="flex-1">  <div class="mx-auto w-full max-w-screen-md"> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="relative px-14 pt-6 pb-4 text-center"> <p class="text-4xl font-bold">CLIP guided pixel optimizations (Dreams)</p> </div>  </div> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="content prose dark:prose-invert prose-code:rounded-lg prose-code:bg-stone-800 prose-code:p-1 prose-code:text-orange-600 prose-img:rounded-lg prose-img:shadow-xl prose-img:dark:shadow-stone-800 mt-8 max-w-none text-base leading-8 text-black dark:text-white">  <h1 id="clip-dream-engine">CLIP Dream Engine</h1>
+<h3 id="semantic-image-optimization-without-diffusion">Semantic Image Optimization Without Diffusion</h3>
+<p><img src="/images/projects/clouds_space_moon.png" alt="Example">
+<img src="/images/projects/clouds_planet_comets_tech.png" alt="Example">
+<img src="/images/projects/mountains_castle_flowers.png" alt="Example">
+<img src="/images/projects/mountains_city_over_clouds.png" alt="Example"></p>
+<hr>
+<h2 id="overview">Overview</h2>
+<p><strong>What if an AI model could dream?</strong></p>
+<p>This project explores a simple but powerful idea:</p>
+<blockquote>
+<p>Instead of training a generative model, what happens if we directly optimize pixels using semantic gradients from CLIP?</p>
+</blockquote>
+<p>CLIP is not a generative model.<br>
+It only measures similarity between images and text.</p>
+<p>This system flips that role.</p>
+<p>CLIP becomes the <strong>semantic judge</strong>, and the image itself becomes the trainable parameter.</p>
+<p>No diffusion.<br>
+No GAN.<br>
+No dataset training.</p>
+<p>Just:</p>
+<blockquote>
+<p>Gradients + Constraints + Multi-scale Optimization.</p>
+</blockquote>
+<hr>
+<h2 id="code--experiments">Code &#x26; Experiments</h2>
+<ul>
+<li>Notebook: <a href="https://github.com/ShivanshTyagi9/Dreams/blob/main/dreams.ipynb" target="_blank">dreams.ipynb</a></li>
+<li>Script: <a href="https://github.com/ShivanshTyagi9/Dreams/blob/main/dreams_script.py" target="_blank">dreams_script.py</a></li>
+<li>PDF explanation: <a href="https://github.com/ShivanshTyagi9/Dreams/blob/main/dreams.pdf" target="_blank">dreams.pdf</a></li>
+</ul>
+<p>Run the notebook, set:</p>
+<ul>
+<li>Base image</li>
+<li>Text prompt</li>
+<li>Octaves</li>
+<li>Steps</li>
+</ul>
+<p>And observe how meaning emerges from gradients.</p>
+<hr>
+<h2 id="core-idea">Core Idea</h2>
+<p>Given:</p>
+<ul>
+<li>Base image <code>I</code></li>
+<li>Text prompt <code>T</code></li>
+</ul>
+<p>We optimize:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>I</mi><mo>^</mo></mover><mo>=</mo><munder><mrow><mi>min</mi><mo>⁡</mo></mrow><mi>I</mi></munder><msub><mi mathvariant="script">L</mi><mtext>CLIP</mtext></msub><mo stretchy="false">(</mo><mi>I</mi><mo separator="true">,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\hat{I} = \min_{I} \mathcal{L}_{\text{CLIP}}(I, T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.4943em;vertical-align:-0.7443em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-2.3557em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07847em;">I</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7443em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">CLIP</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span></span></span>
+<p>Where the goal is to maximize semantic similarity in CLIP’s embedding space.</p>
+<p>The image is directly updated in pixel space using gradient descent.</p>
+<hr>
+<h2 id="key-components">Key Components</h2>
+<h3 id="1-clip-semantic-guidance">1. CLIP Semantic Guidance</h3>
+<ul>
+<li>Text prompt acts as an <strong>attractor</strong></li>
+<li>Negative prompt acts as a <strong>repellor</strong></li>
+<li>Image embeddings are optimized to move toward text embedding</li>
+</ul>
+<hr>
+<h3 id="2-multi-scale-cutouts">2. Multi-Scale Cutouts</h3>
+<p>Instead of feeding the whole image, multiple crops are used:</p>
+<ul>
+<li>Global view</li>
+<li>Mid-scale views</li>
+<li>Local patches</li>
+</ul>
+<p>This ensures:</p>
+<ul>
+<li>Global coherence</li>
+<li>Local detail emergence</li>
+<li>Better semantic alignment</li>
+</ul>
+<hr>
+<h3 id="3-masked-total-variation-regularization">3. Masked Total Variation Regularization</h3>
+<p>Without regularization, optimization produces:</p>
+<ul>
+<li>Noise</li>
+<li>Hallucinated artifacts</li>
+<li>Chaotic pixel explosions</li>
+</ul>
+<p>To fix this, a <strong>Masked TV Loss</strong> is introduced:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>I</mi><mo>^</mo></mover><mo>=</mo><munder><mrow><mi>min</mi><mo>⁡</mo></mrow><mi>I</mi></munder><munder><munder><mrow><msub><mi mathvariant="script">L</mi><mrow><mi>C</mi><mi>L</mi><mi>I</mi><mi>P</mi></mrow></msub><mo stretchy="false">(</mo><mi>I</mi><mo separator="true">,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">⏟</mo></munder><mtext>what</mtext></munder><mo>+</mo><munder><munder><mrow><msub><mi>λ</mi><mrow><mi>t</mi><mi>v</mi></mrow></msub><msub><mi mathvariant="script">L</mi><mrow><mi>M</mi><mi>T</mi><mi>V</mi></mrow></msub><mo stretchy="false">(</mo><mi>I</mi><mo separator="true">,</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><mo stretchy="true">⏟</mo></munder><mtext>how</mtext></munder></mrow><annotation encoding="application/x-tex">\hat{I} = \min_I 
+\underbrace{\mathcal{L}_{CLIP}(I, T)}_{\text{what}} +
+\underbrace{\lambda_{tv}\mathcal{L}_{MTV}(I, M)}_{\text{how}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3341em;vertical-align:-1.5841em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.6679em;"><span style="top:-2.3557em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.07847em;">I</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7443em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.75em;"><span style="top:-1.4159em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">what</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.75em;"><span class="svg-align" style="top:-2.102em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMinYMin slice"><path d="M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z"></path></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMidYMin slice"><path d="M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z"></path></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMaxYMin slice"><path d="M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z"></path></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07153em;">C</span><span class="mord mathnormal mtight">L</span><span class="mord mathnormal mtight" style="margin-right:0.07847em;">I</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.898em;"><span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5841em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.3341em;vertical-align:-1.5841em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.75em;"><span style="top:-1.4159em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">how</span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord munder"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.75em;"><span class="svg-align" style="top:-2.102em;"><span class="pstrut" style="height:3em;"></span><span class="stretchy" style="height:0.548em;min-width:1.6em;"><span class="brace-left" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMinYMin slice"><path d="M0 6l6-6h17c12.688 0 19.313.3 20 1 4 4 7.313 8.3 10 13
+ 35.313 51.3 80.813 93.8 136.5 127.5 55.688 33.7 117.188 55.8 184.5 66.5.688
+ 0 2 .3 4 1 18.688 2.7 76 4.3 172 5h399450v120H429l-6-1c-124.688-8-235-61.7
+-331-161C60.687 138.7 32.312 99.3 7 54L0 41V6z"></path></svg></span><span class="brace-center" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMidYMin slice"><path d="M199572 214
+c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
+ 53.3-86.7 123.7-153 211-199 66.7-36 137.3-56.3 212-62h199568v120H200432c-178.3
+ 11.7-311.7 78.3-403 201-6 8-9.7 12-11 12-.7.7-6.7 1-18 1s-17.3-.3-18-1c-1.3 0
+-5-4-11-12-44.7-59.3-101.3-106.3-170-141s-145.3-54.3-229-60H0V214z"></path></svg></span><span class="brace-right" style="height:0.548em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="0.548em" viewBox="0 0 400000 548" preserveAspectRatio="xMaxYMin slice"><path d="M399994 0l6 6v35l-6 11c-56 104-135.3 181.3-238 232-57.3
+ 28.7-117 45-179 50H-300V214h399897c43.3-7 81-15 113-26 100.7-33 179.7-91 237
+-174 2.7-5 6-9 10-13 .7-1 7.3-1 20-1h17z"></path></svg></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">λ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathcal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">MT</span><span class="mord mathnormal mtight" style="margin-right:0.22222em;">V</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.898em;"><span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5841em;"><span></span></span></span></span></span></span></span></span></span>
+<ul>
+<li>CLIP decides <strong>what should appear</strong></li>
+<li>Masked TV decides <strong>how it is allowed to look</strong></li>
+</ul>
+<p>Edges are preserved.<br>
+Noise is suppressed.<br>
+Flat regions remain stable.</p>
+<hr>
+<h3 id="4-octave-based-optimization">4. Octave-Based Optimization</h3>
+<p>The image is optimized in progressive scales:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mi>I</mi><mo>^</mo></mover><mo>=</mo><msub><mi>I</mi><mn>0</mn></msub><mo>+</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><msub><mi mathvariant="normal">Δ</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">\hat{I} = I_0 + \sum_{k=1}^{N} \Delta_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:3.1304em;vertical-align:-1.3021em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283em;"><span style="top:-1.8479em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3021em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">Δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
+<p>Low resolution establishes structure.<br>
+Higher octaves refine details.</p>
+<p>This prevents:</p>
+<ul>
+<li>High-frequency collapse</li>
+<li>Early-stage noise explosion</li>
+</ul>
+<hr>
+<h3 id="5-pixel-clamping">5. Pixel Clamping</h3>
+<p>CLIP operates purely mathematically.<br>
+It does not understand physical color constraints.</p>
+<p>Optimization can push RGB values to unrealistic ranges.</p>
+<p>Solution:</p>
+<ul>
+<li>Clamp pixel values to <code>[0, 1]</code></li>
+<li>Maintain physically valid colors</li>
+</ul>
+<hr>
+<h2 id="what-this-project-is">What This Project Is</h2>
+<ul>
+<li>Energy-based generative system</li>
+<li>CLIP-guided semantic hallucination engine</li>
+<li>Research exploration of optimization-driven generation</li>
+</ul>
+<h2 id="what-this-project-is-not">What This Project Is Not</h2>
+<ul>
+<li>Not a diffusion model</li>
+<li>Not a GAN</li>
+<li>Not trained on datasets</li>
+<li>Not an image editor</li>
+</ul>
+<hr>
+<h2 id="technical-stack">Technical Stack</h2>
+<ul>
+<li>PyTorch</li>
+<li>OpenCLIP</li>
+<li>Multi-scale augmentation</li>
+<li>Custom Masked TV Loss</li>
+<li>Cosine LR scheduling</li>
+<li>Mixed precision (CUDA support)</li>
+</ul>
+<hr>
+<h2 id="conceptual-summary">Conceptual Summary</h2>
+<p>This project demonstrates that meaningful visual structure can emerge from:</p>
+<blockquote>
+<p>Semantic similarity + Multi-scale views + Regularization.</p>
+</blockquote>
+<p>No sampling.<br>
+No training.</p>
+<p>Just optimization.</p>  </div>  </div> </div>  </div> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <footer class="text-center">
+© 2026 - <a class="underline hover:text-orange-600" href="https://github.com/ShivanshTyagi9/CosmicLab/#" target="_blank">CosmicLab</a> by <a class="underline hover:text-orange-600" href="https://www.linkedin.com/in/shivansh-tyagi-4747a12ba/" target="_blank">Cosmic</a> </footer>  </div> </body></html>

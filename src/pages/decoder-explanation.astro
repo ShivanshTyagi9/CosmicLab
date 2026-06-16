@@ -1,0 +1,34 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import DecoderArchitecture from '@/components/DecoderArchitecture.astro';
+---
+
+<Base head={{ title: 'Decoder Pipeline Explanation', description: 'Architectural explanation of the fused AIS Decoder pipeline.' }}>
+  <Section>
+    <div class="prose dark:prose-invert mt-8 max-w-none">
+      <h1>Fused AIS Decoder Architecture</h1>
+      <p>The AIS Decoder pipeline is designed to be a highly resilient, fused-system architecture that seamlessly processes both NMEA/NMTR and DGLL payloads concurrently. It leverages a Master/Worker model to prevent bottlenecks and deadlocks while maximizing core utilization.</p>
+      
+      <h2>Architectural Workflow</h2>
+    </div>
+    
+    <div class="my-10 w-full">
+      <DecoderArchitecture />
+    </div>
+    
+    <div class="prose dark:prose-invert max-w-none mb-12">
+      <h2>Pipeline Components & Optimizations</h2>
+      <ul>
+        <li><strong>Mounted RAM (tmpfs):</strong> The <code>Raw/</code> ingress directory is mapped to a high-speed RAM disk, drastically reducing I/O latency when processing incoming <code>.txt</code> payloads.</li>
+        <li><strong>Watchdog Observer:</strong> Constantly monitors the <code>Raw/</code> ingress directories for new or modified payloads.</li>
+        <li><strong>File Classifier:</strong> Scans incoming filenames to determine if they are NMEA/NMTR formatted or DGLL formatted, subsequently routing them to the correct pending queue.</li>
+        <li><strong>Pending Queues:</strong> Two thread-safe queues that securely hold the backlog of work for the respective worker pools.</li>
+        <li><strong>CPU Core Pinning:</strong> Each worker process is assigned to a dedicated, physically isolated CPU core to ensure zero thread contention and maximize decoding throughput.</li>
+        <li><strong>Worker Pools:</strong> Dedicated parallel processes running <code>decoder.py</code> and <code>dec_DGLL.py</code>. These workers securely pull payloads from the queues and parse the raw string sentences into structured data dictionaries.</li>
+        <li><strong>Result Queue:</strong> A shared thread-safe queue where the parsing results (or error traces) are passed back to the Master Orchestrator for tracking and cleanup.</li>
+        <li><strong>Processed Output:</strong> The final decoded records are appended into clean, partitioned <code>dynamic_ais.txt</code> and <code>static_ais.txt</code> CSV repositories for downstream command core analytics.</li>
+      </ul>
+    </div>
+  </Section>
+</Base>

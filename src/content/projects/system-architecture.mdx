@@ -1,0 +1,31 @@
+---
+title: "System Workflow Architecture"
+pubDate: 2026-06-16
+description: "Interactive visual overview of the end-to-end system architecture."
+author: "shive"
+minutesRead: "3 min"
+isPinned: false
+excerpt: "Explore the core components of our system workflow, from encoded AIS data and satellite imagery ingestion to the Agentic Layers."
+tags: ["Architecture", "System Design", "Workflow"]
+---
+
+import SystemArchitecture from '../../components/SystemArchitecture.astro';
+
+# Core System Workflow
+
+Here is the interactive architecture visualization constructed from the system blueprint. It maps out the flow from data sources to the final analytical layers powered by Qwen.
+
+<SystemArchitecture />
+
+## Pipeline Highlights
+
+The system operates across three distinct processing stages:
+
+1. **Telemetry & Imagery Pipelines:** 
+   - AIS data is ingested, decoded, and correlated before resting in PostgreSQL.
+   - Satellite Imagery is preprocessed into different formats (`Mbtiles`, `Jpg Clips`, and a metadata `Master CSV`) and stored in MinIO.
+2. **Correlation Layer:** 
+   - The processed insights from the satellite data (`Master CSV`) are fed into the correlation engine for cross-referencing with decoded AIS telemetry.
+3. **Agentic Layer:** 
+   - The central **ReAcT Loop** pulls insights from both PostgreSQL and MinIO.
+   - It utilizes sophisticated tools, memory layers, and an Embedding Model to feed the Qwen 2.5 35B LLM.

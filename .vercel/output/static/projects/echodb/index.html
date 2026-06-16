@@ -1,0 +1,279 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>EchoDB: Persistent, Temporal Memory Layer for LLMs</title><meta name="description" content="A persistent, temporal memory layer for LLM-powered conversational agents. Runs fully locally with llama.cpp, or connects to OpenAI / Anthropic."><meta name="author" content="Cosmic"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" href="/rss.xml"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>"><script>
+	!(function (t, e) {
+		var o, n, p, r;
+		e.__SV ||
+			((window.posthog = e),
+			(e._i = []),
+			(e.init = function (i, s, a) {
+				function g(t, e) {
+					var o = e.split('.');
+					2 == o.length && ((t = t[o[0]]), (e = o[1])),
+						(t[e] = function () {
+							t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+						});
+				}
+				((p = t.createElement('script')).type = 'text/javascript'),
+					(p.crossOrigin = 'anonymous'),
+					(p.async = !0),
+					(p.src =
+						s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js'),
+					(r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(p, r);
+				var u = e;
+				for (
+					void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+						u.people = u.people || [],
+						u.toString = function (t) {
+							var e = 'posthog';
+							return 'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e;
+						},
+						u.people.toString = function () {
+							return u.toString(1) + '.people (stub)';
+						},
+						o =
+							'init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric'.split(
+								' '
+							),
+						n = 0;
+					n < o.length;
+					n++
+				)
+					g(u, o[n]);
+				e._i.push([i, s, a]);
+			}),
+			(e.__SV = 1));
+	})(document, window.posthog || []);
+	posthog.init('phc_Hg5U4UUmxUkHFZOIxJekBqG6dAHSrEo9G521dpUcXv9', {
+		api_host: 'https://eu.i.posthog.com',
+		defaults: '2025-05-24',
+		person_profiles: 'identified_only' // or 'always' to create profiles for anonymous users as well
+	});
+</script><link rel="stylesheet" href="/_astro/_slug_.x64rEJUl.css"><script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+		var script = document.createElement('script');
+		script.defer = true;
+		script.src = '/_vercel/insights/script.js';
+		var head = document.querySelector('head');
+		head.appendChild(script);
+	</script></head> <body class="flex min-h-screen flex-col bg-stone-100 font-mono text-gray-950 dark:bg-stone-900 dark:text-white"> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="flex items-center justify-between"> <div class="text-3xl font-bold"> <a href="/">🔭 <span class="pr-2 text-2xl text-gray-500">&lt;</span>Cosmic<span class="text-orange-600"></span>Lab<span class="pl-2 text-2xl text-gray-500">/&gt;</span></a> </div> <div class="flex items-center"> <!-- Desktop Navigation --> <nav> <ul class="hidden flex-row sm:flex gap-6"> <li><a href="/tags" class="hover:text-orange-600">TAGS</a></li> <li><a href="/blogs" class="hover:text-orange-600">BLOG</a></li> <li><a href="/projects" class="hover:text-orange-600">PROJECTS</a></li> </ul> </nav> <!-- Desktop Theme Switcher --> <div class="ml-3 hidden flex-col justify-center sm:flex"> <input type="checkbox" id="light-switch-desktop" class="light-switch sr-only"> <label class="tada relative cursor-pointer p-2" for="light-switch-desktop"> <svg class="dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-stone-800" d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z"></path> <path class="fill-gray-900" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"></path> </svg> <svg class="hidden dark:block" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z"></path> <path class="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"></path> </svg> <span class="sr-only">Switch to light / dark version</span> </label> </div> <!-- Mobile Menu Button --> <button id="mobile-menu-button" class="p-2 sm:hidden" aria-label="Toggle mobile menu"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div>  <div id="mobile-menu" class="mt-4 hidden rounded-lg border border-gray-200 bg-white pb-2 shadow-md transition-all duration-300 sm:hidden dark:border-gray-200 dark:bg-stone-900"> <nav class="flex flex-col p-3"> <a href="/tags" class="border-b border-gray-200 py-2 hover:text-orange-600">TAGS</a> <a href="/" class="border-b border-gray-200 py-2 hover:text-orange-600">BLOG</a> <!-- Mobile Theme Switcher --> <div class="flex items-center py-2"> <input type="checkbox" id="light-switch-mobile" class="light-switch sr-only"> <label class="tada relative cursor-pointer p-2" for="light-switch-mobile"> <svg class="dark:hidden" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-stone-800" d="M7 0h2v2H7zM12.88 1.637l1.414 1.415-1.415 1.413-1.413-1.414zM14 7h2v2h-2zM12.95 14.433l-1.414-1.413 1.413-1.415 1.415 1.414zM7 14h2v2H7zM2.98 14.364l-1.413-1.415 1.414-1.414 1.414 1.415zM0 7h2v2H0zM3.05 1.706 4.463 3.12 3.05 4.535 1.636 3.12z"></path> <path class="fill-gray-900" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"></path> </svg> <svg class="hidden dark:block" width="16" height="16" xmlns="http://www.w3.org/2000/svg"> <path class="fill-slate-400" d="M6.2 1C3.2 1.8 1 4.6 1 7.9 1 11.8 4.2 15 8.1 15c3.3 0 6-2.2 6.9-5.2C9.7 11.2 4.8 6.3 6.2 1Z"></path> <path class="fill-slate-500" d="M12.5 5a.625.625 0 0 1-.625-.625 1.252 1.252 0 0 0-1.25-1.25.625.625 0 1 1 0-1.25 1.252 1.252 0 0 0 1.25-1.25.625.625 0 1 1 1.25 0c.001.69.56 1.249 1.25 1.25a.625.625 0 1 1 0 1.25c-.69.001-1.249.56-1.25 1.25A.625.625 0 0 1 12.5 5Z"></path> </svg> <span class="sr-only">Switch to light / dark version</span> </label> </div> </nav> </div>  </div> <script type="module">const o=document.querySelectorAll(".light-switch");function s(e){e?(document.documentElement.classList.add("dark"),localStorage.setItem("theme","dark")):(document.documentElement.classList.remove("dark"),localStorage.setItem("theme","light"))}if(o.length>0){const e=localStorage.getItem("theme")==="dark";s(e),o.forEach(n=>{n.checked=e}),o.forEach(n=>{n.addEventListener("click",()=>{const r=n.checked;s(r)})})}const t=document.getElementById("mobile-menu-button"),l=document.getElementById("mobile-menu");t&&l&&t.addEventListener("click",()=>{const e=t.getAttribute("aria-expanded")==="true"||!1;t.setAttribute("aria-expanded",(!e).toString()),l.classList.toggle("hidden"),e?t.innerHTML=`
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				`:t.innerHTML=`
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				`});</script> <div class="flex-1">  <div class="mx-auto w-full max-w-screen-md"> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="relative px-14 pt-6 pb-4 text-center"> <p class="text-4xl font-bold">EchoDB: Persistent, Temporal Memory Layer for LLMs</p> </div>  </div> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <div class="content prose dark:prose-invert prose-code:rounded-lg prose-code:bg-stone-800 prose-code:p-1 prose-code:text-orange-600 prose-img:rounded-lg prose-img:shadow-xl prose-img:dark:shadow-stone-800 mt-8 max-w-none text-base leading-8 text-black dark:text-white">  <h1 id="echodb">EchoDB</h1>
+<h3 id="persistent-temporal-memory-layer-for-llm-powered-conversational-agents">Persistent, Temporal Memory Layer for LLM-Powered Conversational Agents</h3>
+<p><img src="/images/projects/echodb.png" alt="EchoDB Memory Graph"></p>
+<p>Without memory, every conversation with an AI starts from zero. <strong>EchoDB</strong> changes this by acting as a persistent, temporal memory layer. Drop it into any chat loop, and your assistant will remember facts, track how they change over time, extract structured knowledge from conversations, and retrieve the right context at the right moment.</p>
+<p>Runs fully locally with <a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> (no API keys required), or connects to OpenAI / Anthropic with a simple configuration change.</p>
+<hr>
+<h2 id="key-capabilities">Key Capabilities</h2>
+<ul>
+<li><strong>Structured Recall</strong> — The agent knows not just <em>that</em> the user mentioned something, but <em>what kind of thing</em> it was: a fact, a preference, a task, a technical procedure, or an episodic event.</li>
+<li><strong>Temporal Awareness</strong> — When facts change (e.g., <em>“I moved from Seattle to New York”</em>), old facts are preserved with timestamps, and a new version is created. The agent retrieves the latest version but can trace the full timeline.</li>
+<li><strong>Automatic Entity Linking</strong> — Pronouns and references resolve to the same person (e.g., “Alex”, “he”, and “the user”). Related concepts are wired as graph edges and retrieved together.</li>
+<li><strong>Decay &#x26; Reinforcement</strong> — Episodic memories fade if never recalled again, while stable facts and procedural workflows persist indefinitely. Accessing a memory counteracts its decay.</li>
+<li><strong>Portable Snapshots</strong> — Save the entire memory state (graph structure + embeddings + KB sections) into a single <code>.umc</code> file and restore it anywhere instantly.</li>
+<li><strong>Obsidian Integration</strong> — Write human-readable Markdown files representing entities and relationships directly to a local Vault folder.</li>
+</ul>
+<hr>
+<h2 id="architecture-the-best-of-both-worlds">Architecture: The Best of Both Worlds</h2>
+<p>EchoDB merges two distinct paradigms of memory architectures:</p>
+<ol>
+<li><strong>Vault Pipeline</strong> — Handles rich extraction. It scans a conversation and pulls out entities, relationships (<code>works_at</code>, <code>member_of</code>), code artifacts, and multi-step procedures.</li>
+<li><strong>Capsule Engine</strong> — Handles a sophisticated temporal graph. It tracks decay rates, manages version history via update chains, and retrieves items using a hybrid scoring algorithm.</li>
+</ol>
+<pre><code>User sends a message
+        │
+        ▼
+ConversationExtractor (LLM call)
+        │
+        ▼
+Normalization Passes
+  • Resolve "User"/"I"/"me" → real name
+  • Collapse technology stubs into parent facts
+        │
+        ▼
+Ingestion Pipeline
+  For each item type:
+  ┌─────────────────────────────────────────────────────┐
+  │  Entity ──► Upsert entity node                      │
+  │  Fact ────► Dedup / Relationship classification      │
+  │  Relation ─► Graph edge + summary fact node          │
+  │  Episode ──► Fast-decay EPISODE node                 │
+  │  Procedure ► Near-zero-decay PROCEDURAL node        │
+  └─────────────────────────────────────────────────────┘
+        │
+        ├──► MemoryGraph (nodes + edges + temporal chains)
+        ├──► CapsuleVectorStore (embeddings)
+        ├──► KBStore (7 structured sections)
+        └──► VaultManager (Optional Obsidian .md output)
+</code></pre>
+<hr>
+<h2 id="quickstart">Quickstart</h2>
+<p>Install the library:</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="bash" data-theme="github-dark-dimmed"><code data-language="bash" data-theme="github-dark-dimmed" style="display: grid;"><span data-line=""><span style="color:#F69D50">pip</span><span style="color:#96D0FF"> install</span><span style="color:#96D0FF"> echodb</span></span></code></pre></figure>
+<p>Set up a memory instance with your preferred LLM and Embedder backends:</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="python" data-theme="github-dark-dimmed"><code data-language="python" data-theme="github-dark-dimmed" style="display: grid;"><span data-line=""><span style="color:#F47067">from</span><span style="color:#ADBAC7"> brain </span><span style="color:#F47067">import</span><span style="color:#ADBAC7"> OpenAIClient, OpenAIEmbedder</span></span>
+<span data-line=""><span style="color:#F47067">from</span><span style="color:#ADBAC7"> echodb </span><span style="color:#F47067">import</span><span style="color:#ADBAC7"> UnifiedMemoryLayer</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># Initialize the memory layer</span></span>
+<span data-line=""><span style="color:#ADBAC7">mem </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> UnifiedMemoryLayer(</span></span>
+<span data-line=""><span style="color:#F69D50">    llm_client</span><span style="color:#F47067"> =</span><span style="color:#ADBAC7"> OpenAIClient(</span><span style="color:#F69D50">model</span><span style="color:#F47067">=</span><span style="color:#96D0FF">"gpt-4o-mini"</span><span style="color:#ADBAC7">),</span></span>
+<span data-line=""><span style="color:#F69D50">    embedder</span><span style="color:#F47067">   =</span><span style="color:#ADBAC7"> OpenAIEmbedder(),</span></span>
+<span data-line=""><span style="color:#F69D50">    name</span><span style="color:#F47067">       =</span><span style="color:#96D0FF"> "assistant_memory"</span><span style="color:#ADBAC7">,</span></span>
+<span data-line=""><span style="color:#F69D50">    vault_path</span><span style="color:#F47067"> =</span><span style="color:#96D0FF"> "./vault"</span><span style="color:#768390">  # Optional: syncs memory to Obsidian-compatible markdown files</span></span>
+<span data-line=""><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># Remember a conversation turn</span></span>
+<span data-line=""><span style="color:#ADBAC7">mem.remember([</span></span>
+<span data-line=""><span style="color:#ADBAC7">    {</span><span style="color:#96D0FF">"role"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"user"</span><span style="color:#ADBAC7">,      </span><span style="color:#96D0FF">"content"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"Hi, I'm Priya. I work at DeepMind on RL research."</span><span style="color:#ADBAC7">},</span></span>
+<span data-line=""><span style="color:#ADBAC7">    {</span><span style="color:#96D0FF">"role"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"assistant"</span><span style="color:#ADBAC7">, </span><span style="color:#96D0FF">"content"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"Nice to meet you, Priya!"</span><span style="color:#ADBAC7">},</span></span>
+<span data-line=""><span style="color:#ADBAC7">    {</span><span style="color:#96D0FF">"role"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"user"</span><span style="color:#ADBAC7">,      </span><span style="color:#96D0FF">"content"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"I'm building a reward shaping library in PyTorch."</span><span style="color:#ADBAC7">},</span></span>
+<span data-line=""><span style="color:#ADBAC7">])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># Retrieve relevant context for the next prompt</span></span>
+<span data-line=""><span style="color:#ADBAC7">context </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> mem.recall(</span><span style="color:#96D0FF">"What is Priya working on?"</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""><span style="color:#6CB6FF">print</span><span style="color:#ADBAC7">(context)</span></span></code></pre></figure>
+<hr>
+<h2 id="integrating-into-a-chat-loop">Integrating into a Chat Loop</h2>
+<p>This is the primary production pattern. Memory is recalled before generating a reply, and updated after every turn:</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="python" data-theme="github-dark-dimmed"><code data-language="python" data-theme="github-dark-dimmed" style="display: grid;"><span data-line=""><span style="color:#F47067">from</span><span style="color:#ADBAC7"> brain </span><span style="color:#F47067">import</span><span style="color:#ADBAC7"> OpenAIClient, OpenAIEmbedder</span></span>
+<span data-line=""><span style="color:#F47067">from</span><span style="color:#ADBAC7"> echodb </span><span style="color:#F47067">import</span><span style="color:#ADBAC7"> UnifiedMemoryLayer</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#ADBAC7">llm </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> OpenAIClient(</span><span style="color:#F69D50">model</span><span style="color:#F47067">=</span><span style="color:#96D0FF">"gpt-4o-mini"</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""><span style="color:#ADBAC7">mem </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> UnifiedMemoryLayer(</span></span>
+<span data-line=""><span style="color:#F69D50">    llm_client</span><span style="color:#F47067"> =</span><span style="color:#ADBAC7"> llm,</span></span>
+<span data-line=""><span style="color:#F69D50">    embedder</span><span style="color:#F47067">   =</span><span style="color:#ADBAC7"> OpenAIEmbedder(),</span></span>
+<span data-line=""><span style="color:#F69D50">    name</span><span style="color:#F47067">       =</span><span style="color:#96D0FF"> "chat_session"</span><span style="color:#ADBAC7">,</span></span>
+<span data-line=""><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#ADBAC7">history </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> []</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#F47067">def</span><span style="color:#DCBDFB"> chat</span><span style="color:#ADBAC7">(user_message: </span><span style="color:#6CB6FF">str</span><span style="color:#ADBAC7">) -> </span><span style="color:#6CB6FF">str</span><span style="color:#ADBAC7">:</span></span>
+<span data-line=""><span style="color:#768390">    # 1. Retrieve relevant context BEFORE answering</span></span>
+<span data-line=""><span style="color:#ADBAC7">    context </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> mem.recall(user_message, </span><span style="color:#F69D50">top_k</span><span style="color:#F47067">=</span><span style="color:#6CB6FF">5</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#ADBAC7">    system </span><span style="color:#F47067">=</span><span style="color:#96D0FF"> "You are a helpful assistant with persistent memory. Use the context naturally."</span></span>
+<span data-line=""><span style="color:#F47067">    if</span><span style="color:#ADBAC7"> context:</span></span>
+<span data-line=""><span style="color:#ADBAC7">        system </span><span style="color:#F47067">+=</span><span style="color:#F47067"> f</span><span style="color:#96D0FF">"</span><span style="color:#F47067">\n\n{</span><span style="color:#ADBAC7">context</span><span style="color:#F47067">}</span><span style="color:#96D0FF">"</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390">    # 2. Add to history and get LLM reply</span></span>
+<span data-line=""><span style="color:#ADBAC7">    history.append({</span><span style="color:#96D0FF">"role"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"user"</span><span style="color:#ADBAC7">, </span><span style="color:#96D0FF">"content"</span><span style="color:#ADBAC7">: user_message})</span></span>
+<span data-line=""><span style="color:#ADBAC7">    reply </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> llm.chat(history[</span><span style="color:#F47067">-</span><span style="color:#6CB6FF">12</span><span style="color:#ADBAC7">:], </span><span style="color:#F69D50">system</span><span style="color:#F47067">=</span><span style="color:#ADBAC7">system)</span></span>
+<span data-line=""><span style="color:#ADBAC7">    history.append({</span><span style="color:#96D0FF">"role"</span><span style="color:#ADBAC7">: </span><span style="color:#96D0FF">"assistant"</span><span style="color:#ADBAC7">, </span><span style="color:#96D0FF">"content"</span><span style="color:#ADBAC7">: reply})</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390">    # 3. Store the last 6 turns into memory</span></span>
+<span data-line=""><span style="color:#ADBAC7">    mem.remember(history[</span><span style="color:#F47067">-</span><span style="color:#6CB6FF">6</span><span style="color:#ADBAC7">:])</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#F47067">    return</span><span style="color:#ADBAC7"> reply</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># Normal conversation flow</span></span>
+<span data-line=""><span style="color:#ADBAC7">chat(</span><span style="color:#96D0FF">"I'm building a fraud detection system with Kafka and FastAPI."</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""><span style="color:#ADBAC7">chat(</span><span style="color:#96D0FF">"The main bottleneck is vector DB query latency."</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""><span style="color:#ADBAC7">chat(</span><span style="color:#96D0FF">"I pinned the embedding model to VRAM — dropped from 4s to 200ms."</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># The assistant recalls the solution when queried about it later</span></span>
+<span data-line=""><span style="color:#6CB6FF">print</span><span style="color:#ADBAC7">(chat(</span><span style="color:#96D0FF">"What was causing my latency issue again?"</span><span style="color:#ADBAC7">))</span></span></code></pre></figure>
+<hr>
+<h2 id="under-the-hood-deep-dive">Under the Hood: Deep Dive</h2>
+<h3 id="1-identity-normalization">1. Identity Normalization</h3>
+<p>The LLM often generates a generic <code>"User"</code> entity. EchoDB resolves first-person pronouns (<code>"User"</code>, <code>"me"</code>, <code>"I"</code>) into the speaker’s true name (e.g., <code>"Priya"</code>). This mapping is cached in a persistent entity registry, ensuring facts remain coherent across turns.</p>
+<h3 id="2-technology-de-fragmentation">2. Technology De-fragmentation</h3>
+<p>To prevent the graph from exploding with empty technology stubs (like creating a file for <code>Kafka</code> or <code>FastAPI</code> with no independent facts), EchoDB collapses stubs. If a technology has no outgoing relations and is just a relation target, it gets absorbed directly into its parent entity’s facts (e.g., <code>Fraud Detection API</code> gains the fact <code>"uses Kafka (event stream)"</code>).</p>
+<h3 id="3-temporal-versioning-the-updates-chain">3. Temporal Versioning (The UPDATES Chain)</h3>
+<p>When a new fact contradicts an existing fact, EchoDB classifies this relationship and builds a temporal version chain:</p>
+<ul>
+<li>The old node is marked <code>is_latest = False</code> and updated with a <code>superseded_at</code> timestamp.</li>
+<li>A <code>TEMPORAL_CHAIN</code> edge is created pointing from the new node to the old node.</li>
+<li>You can query the entire history of a fact using <code>get_full_timeline(node_id)</code> or visualize it directly.</li>
+</ul>
+<pre><code>[ Priya lives in Berlin ] (Latest)
+          │
+          ▼ TEMPORAL_CHAIN
+[ Priya lives in New York ] (Superseded)
+          │
+          ▼ TEMPORAL_CHAIN
+[ Priya lives in Seattle ] (Superseded)
+</code></pre>
+<hr>
+<h2 id="memory-strengths-and-decay">Memory Strengths and Decay</h2>
+<p>EchoDB models memory decay using an exponential decay formula combined with retrieval reinforcement:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>strength</mtext><mo>=</mo><mi>min</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mn>1.0</mn><mo separator="true">,</mo><mtext> </mtext><mrow><mo fence="true">(</mo><mtext>salience</mtext><mo>×</mo><msup><mi>e</mi><mrow><mo>−</mo><mtext>decay_rate</mtext><mo>×</mo><mtext>elapsed_seconds</mtext></mrow></msup><mo>+</mo><mi>min</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0.25</mn><mo separator="true">,</mo><mtext> </mtext><mn>0.025</mn><mo>×</mo><mtext>access_count</mtext><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow><mo>×</mo><mtext>confidence</mtext><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{strength} = \min\left(1.0, \, \left(\text{salience} \times e^{-\text{decay\_rate} \times \text{elapsed\_seconds}} + \min(0.25, \, 0.025 \times \text{access\_count})\right) \times \text{confidence}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">strength</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2491em;vertical-align:-0.35em;"></span><span class="mop">min</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord">1.0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord text"><span class="mord">salience</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord text mtight"><span class="mord mtight">decay_rate</span></span><span class="mbin mtight">×</span><span class="mord text mtight"><span class="mord mtight">elapsed_seconds</span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop">min</span><span class="mopen">(</span><span class="mord">0.25</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0.025</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">access_count</span></span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">confidence</span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span></span>
+<p>Each memory type features distinct decay behavior:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Memory Type</th><th align="left">Decay Rate</th><th align="left">Base Salience</th><th align="left">Target Information</th></tr></thead><tbody><tr><td align="left"><code>procedural</code></td><td align="left">Near-zero</td><td align="left">0.95</td><td align="left">Step-by-step workflows and technical solutions</td></tr><tr><td align="left"><code>task</code></td><td align="left">Slow</td><td align="left">0.95</td><td align="left">Action items, reminders, and deadlines</td></tr><tr><td align="left"><code>fact</code></td><td align="left">Very slow</td><td align="left">0.90</td><td align="left">Stable assertions (jobs, names, locations)</td></tr><tr><td align="left"><code>preference</code></td><td align="left">Slow</td><td align="left">0.85</td><td align="left">User likes, dislikes, and habits</td></tr><tr><td align="left"><code>derived</code></td><td align="left">Medium</td><td align="left">0.80</td><td align="left">Insights synthesized from episodes</td></tr><tr><td align="left"><code>episode</code></td><td align="left">Fast</td><td align="left">0.70</td><td align="left">Specific historical events (fades if unused)</td></tr></tbody></table>
+<hr>
+<h2 id="advanced-operations">Advanced Operations</h2>
+<h3 id="consolidation-and-synthesis">Consolidation and Synthesis</h3>
+<p>Periodically run the consolidation pass. This synthesizes episodic events into permanent generalized facts and cleans up the background knowledge base:</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="python" data-theme="github-dark-dimmed"><code data-language="python" data-theme="github-dark-dimmed" style="display: grid;"><span data-line=""><span style="color:#768390"># Generalize experiences and regenerate the structured KB markdown sections</span></span>
+<span data-line=""><span style="color:#ADBAC7">mem.consolidate(</span><span style="color:#F69D50">min_episodes</span><span style="color:#F47067">=</span><span style="color:#6CB6FF">3</span><span style="color:#ADBAC7">, </span><span style="color:#F69D50">regenerate_kb</span><span style="color:#F47067">=</span><span style="color:#6CB6FF">True</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># Decay and prune weak nodes</span></span>
+<span data-line=""><span style="color:#ADBAC7">mem.decay(</span><span style="color:#F69D50">threshold</span><span style="color:#F47067">=</span><span style="color:#6CB6FF">0.05</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># Save a snapshot of the current state</span></span>
+<span data-line=""><span style="color:#ADBAC7">mem.snapshot(</span><span style="color:#96D0FF">"session_backup.umc"</span><span style="color:#ADBAC7">)</span></span></code></pre></figure>
+<h3 id="multi-agent-memory-sharing">Multi-Agent Memory Sharing</h3>
+<p>Multiple agents can share the same live memory graph using sockets. When Agent A ingests new information, Agent B has access to it immediately:</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="python" data-theme="github-dark-dimmed"><code data-language="python" data-theme="github-dark-dimmed" style="display: grid;"><span data-line=""><span style="color:#F47067">from</span><span style="color:#ADBAC7"> brain.capsule.socket </span><span style="color:#F47067">import</span><span style="color:#ADBAC7"> AccessMode</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#ADBAC7">socket </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> mem.get_socket(</span><span style="color:#96D0FF">"shared-project"</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#ADBAC7">researcher </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> socket.connect(</span><span style="color:#96D0FF">"researcher"</span><span style="color:#ADBAC7">, </span><span style="color:#F69D50">mode</span><span style="color:#F47067">=</span><span style="color:#ADBAC7">AccessMode.</span><span style="color:#6CB6FF">READ_WRITE</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""><span style="color:#ADBAC7">summariser </span><span style="color:#F47067">=</span><span style="color:#ADBAC7"> socket.connect(</span><span style="color:#96D0FF">"summariser"</span><span style="color:#ADBAC7">, </span><span style="color:#F69D50">mode</span><span style="color:#F47067">=</span><span style="color:#ADBAC7">AccessMode.</span><span style="color:#6CB6FF">READ_ONLY</span><span style="color:#ADBAC7">)</span></span>
+<span data-line=""> </span>
+<span data-line=""><span style="color:#768390"># Ingested information is visible instantly across all connected handles</span></span>
+<span data-line=""><span style="color:#ADBAC7">researcher.ingest(</span><span style="color:#96D0FF">"The API passed load testing at 10k req/s."</span><span style="color:#ADBAC7">)</span></span></code></pre></figure>
+<h3 id="d3-visualization">D3 Visualization</h3>
+<p>EchoDB generates interactive, standalone D3 graph explorers. Run the visualization method, and it creates an HTML page showing node types, relative strengths, and temporal relationships:</p>
+<figure data-rehype-pretty-code-figure=""><pre style="background-color:#22272e;color:#adbac7" tabindex="0" data-language="python" data-theme="github-dark-dimmed"><code data-language="python" data-theme="github-dark-dimmed" style="display: grid;"><span data-line=""><span style="color:#768390"># Writes memory_graph.html and opens it in the default web browser</span></span>
+<span data-line=""><span style="color:#ADBAC7">mem.visualize(</span><span style="color:#96D0FF">"memory_graph.html"</span><span style="color:#ADBAC7">, </span><span style="color:#F69D50">open_browser</span><span style="color:#F47067">=</span><span style="color:#6CB6FF">True</span><span style="color:#ADBAC7">)</span></span></code></pre></figure>  </div>  </div> </div>  </div> <div class="mx-auto w-full max-w-screen-lg px-4 py-6">  <footer class="text-center">
+© 2026 - <a class="underline hover:text-orange-600" href="https://github.com/ShivanshTyagi9/CosmicLab/#" target="_blank">CosmicLab</a> by <a class="underline hover:text-orange-600" href="https://www.linkedin.com/in/shivansh-tyagi-4747a12ba/" target="_blank">Cosmic</a> </footer>  </div> </body></html>

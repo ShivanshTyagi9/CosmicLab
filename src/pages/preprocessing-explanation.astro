@@ -1,0 +1,38 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import PreprocessingArchitecture from '@/components/PreprocessingArchitecture.astro';
+---
+
+<Base head={{ title: 'Image Preprocessing Pipeline', description: 'Architectural explanation of the satellite imagery processing pipeline.' }}>
+  <Section>
+    <div class="prose dark:prose-invert mt-8 max-w-none">
+      <h1>Image Preprocessing Pipeline</h1>
+      <p>The image preprocessing pipeline is a highly optimized engine designed to ingest satellite imagery, perform multi-threaded geospatial operations, and execute batched ship detection inference using PyTorch and ONNX Runtime. The pipeline eliminates storage bottlenecks by relying almost entirely on a high-speed RAM disk for intermediate operations.</p>
+      
+      <h2>Architectural Workflow</h2>
+    </div>
+    
+    <div class="my-10 w-full">
+      <PreprocessingArchitecture />
+    </div>
+    
+    <div class="prose dark:prose-invert max-w-none mb-12">
+      <h2>Pipeline Components & Optimizations</h2>
+      <ul>
+        <li><strong>Mounted RAM Disk (tmpfs):</strong> A virtual memory partition that serves as a zero-latency staging ground for all intermediate outputs (extracted archives, temporary crops, SHP files). This completely mitigates NVMe/SSD read/write bottlenecks during heavy I/O operations.</li>
+        <li><strong>Archive Ingest & Parallel Extract:</strong> Handles incoming <code>.zip</code>, <code>.tar</code>, and <code>.tgz</code> bundles. Extraction is offloaded to highly parallelized tools like <code>pigz</code> and <code>unzip</code>, which utilize all available cores.</li>
+        <li><strong>Pipeline Router:</strong> Scans the extracted payload and determines whether it should undergo the standard <code>gdalwarp</code> clipping process (if SHP files are present) or jump straight to inference (Image-Only pipeline).</li>
+        <li><strong>GeoPandas SHP Processing:</strong> Buffers and reprojects the detection shapes purely in-memory (EPSG:4326), avoiding unnecessary intermediate file writes.</li>
+        <li><strong>Multi-threaded Raster Clipping:</strong> Launches highly parallelized <code>gdalwarp</code> jobs via a ThreadPoolExecutor, dynamically allocating all available CPU threads to clip multi-band TIFFs around the buffered areas.</li>
+        <li><strong>Producer/Consumer Decoupling:</strong> 
+          <ul>
+            <li><strong>Producer (CPU):</strong> Tiles large TIFFs (without loading them fully into RAM) and normalizes pixel values via GPU tensor stretches (2nd-98th percentile), outputting inference-ready JPGs.</li>
+            <li><strong>Consumer (GPU):</strong> A dedicated queue pulls the staged images, loading them into pinned memory for zero-copy DMA transfer to the VRAM. ONNX Runtime then executes batched inference using <code>CUDAExecutionProvider</code>, auto-sizing the batch to avoid cuDNN limits.</li>
+          </ul>
+        </li>
+        <li><strong>Metadata Fusion:</strong> Merges geospatial coordinates (extracted from SHP or KML/KMZ files) with the ONNX classification predictions into a final Master CSV file.</li>
+      </ul>
+    </div>
+  </Section>
+</Base>
